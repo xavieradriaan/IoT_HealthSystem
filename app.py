@@ -1,3 +1,4 @@
+# app.py
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from models import Paciente, Cita
@@ -14,7 +15,6 @@ users = {'user1': {'password': 'password1'}, 'user2': {'password': 'password2'}}
 
 # Listas para almacenar pacientes y citas
 pacientes = []
-
 citas = []
 
 class User(UserMixin):
@@ -66,7 +66,7 @@ def agregar_paciente():
         paciente = Paciente(nombre, edad, dni)
         pacientes.append(paciente)
 
-    return redirect('/')
+    return redirect(url_for('index'))
 
 @app.route('/agregar_cita', methods=['POST'])
 @login_required
@@ -79,7 +79,7 @@ def agregar_cita():
         cita = Cita(dni, fecha, motivo)
         citas.append(cita)
 
-    return redirect('/')
+    return redirect(url_for('index'))
 
 if __name__ == '__main__':
     app.run(debug=True)
