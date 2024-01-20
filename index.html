@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Salud</title>
+</head>
+<body>
+    <h1>Sistema de Salud</h1>
+    <h2>Pacientes</h2>
+    <ul>
+        {% for paciente in pacientes %}
+            <li>{{ paciente.nombre }} - {{ paciente.edad }} años - DNI: {{ paciente.dni }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Citas</h2>
+    <ul>
+        {% for cita in citas %}
+            <li>Paciente DNI: {{ cita.dni }} - Fecha: {{ cita.fecha }} - Motivo: {{ cita.motivo }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Agregar Paciente</h2>
+    <form method="post" action="{{ url_for('agregar_paciente') }}">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required>
+        <br>
+        <label for="edad">Edad:</label>
+        <input type="text" id="edad" name="edad" required>
+        <br>
+        <label for="dni">DNI:</label>
+        <input type="text" id="dni" name="dni" required>
+        <br>
+        <button type="submit">Agregar Paciente</button>
+    </form>
+
+    <h2>Agregar Cita</h2>
+    <form method="post" action="{{ url_for('agregar_cita') }}">
+        <label for="dni">DNI del Paciente:</label>
+        <input type="text" id="dni" name="dni" required>
+        <br>
+        <label for="fecha">Fecha:</label>
+        <input type="text" id="fecha" name="fecha" required>
+        <br>
+        <label for="motivo">Motivo:</label>
+        <input type="text" id="motivo" name="motivo" required>
+        <br>
+        <button type="submit">Agregar Cita</button>
+    </form>
+
+    <h2>Cerrar Sesión</h2>
+    <a href="{{ url_for('logout') }}">Cerrar Sesión</a>
+</body>
+</html>
